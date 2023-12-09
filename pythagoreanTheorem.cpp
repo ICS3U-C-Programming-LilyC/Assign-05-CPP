@@ -8,107 +8,130 @@
 
 // Using C++ libraries to get user input/output,
 // calculate math and allow for use of std::.
-#include<iostream>
-#include<cmath>
-#include<string>
+#include <cmath>
+#include <iomanip>
+#include <iostream>
 
 // Declaring function to calculate the hypotenuse.
 float CalculateHypotenuse(float sideA, float sideB) {
-    // Declaring variables
-    float sumOfSquares;
-    float hypotenuse;
     // Calculating hypotenuse.
-    sumOfSquares = (sideA * sideA) + (sideB * sideB);
-    hypotenuse = std::sqrt(sumOfSquares);
-    return hypotenuse;
+    float sumOfSquares = (sideA * sideA) + (sideB * sideB);
+    return std::sqrt(sumOfSquares);
 }
 
 // Declaring function to calculate the perimeter.
 float CalculatePerimeter(float sideA, float sideB) {
-    // Declaring variables.
-    float perimeter;
-    float hypotenuse;
-    // Calling the calculated hypotenuse from its
-    // function to use it for calculating the perimeter.
-    hypotenuse = CalculateHypotenuse(sideA, sideB);
+    // Calling the calculated hypotenuse from
+    // its function to use it for calculating
+    // the perimeter.
+    float hypotenuse = CalculateHypotenuse(sideA, sideB);
     // Calculating the perimeter.
-    perimeter = sideA + sideB + hypotenuse;
-    // Returning the perimeter to the function.
-    return perimeter;
+    return sideA + sideB + hypotenuse;
 }
 
-// Declaring main() function to get user
-// input/output, catch invalid inputs and
-// loop.
+// Declaring main() function to get user input/output,
+// catch invalid inputs and loop.
 int main() {
-    // Using a Do...While loop to allow for
-    // main() function to be run more than
-    // once, if the user would like to.
+    // Explaining my program to the user.
+    std::cout << "Welcome to my right triangle program in C++. ";
+    std::cout << "My program will calculate the hypotenuse of any right";
+    std::cout << "triangle using Pythagorean Theorem and can additionally ";
+    std::cout << "calculate its perimeter. It uses a loop to allow";
+    std::cout << " for my program to be run again.\n";
+
+    // Declaring variables.
+    // Declare runProgramAgain variable before the loop.
+    int loopProgram = 0;
+    std::string sideA;
+    std::string sideB;
+    std::string runProgramAgain;
+    int runProgramAgainInt;
+    float hypotenuse;
+    float perimeter;
+
+    // Initiating Do...While loop.
     do {
-        // Explaining my program to the user.
-        std::cout << "Welcome to my right triangle program in python.";
-        std::cout << " My program will calculate the hypotenuse of any right";
-        std::cout << " triangle using Pythagorean Theorem and can additionally";
-        std::cout << " calculate its perimeter. It uses a loop to allow";
-        std::cout << " for my program to be run again.";
-
-        // Declaring variables.
-        std::string sideA;
-        std::string sideB;
-        std::string userInputForLoop;
-        float hypotenuse;
-        float perimeter;
-
         // Getting user input for sides A and B.
         std::cout << "Enter the length of side A (cm): ";
         std::cin >> sideA;
         std::cout << "Enter the length of side B (cm): ";
         std::cin >> sideB;
 
-        // Using a try catch to catch any invalid
+        // Using a try-catch to catch any invalid
         // inputs for side lengths A and B.
         try {
+            // Converting user inputs from strings
+            // to floats.
             float sideAAsFloat = std::stof(sideA);
             float sideBAsFloat = std::stof(sideB);
 
-            // Calculating hypotenuse and perimeter.
+            // Calling functions to display the
+            // hypotenuse and perimeter.
             hypotenuse = CalculateHypotenuse(sideAAsFloat, sideBAsFloat);
             perimeter = CalculatePerimeter(sideAAsFloat, sideBAsFloat);
 
-            // Displaying the hypotenuse and perimeter to the user.
-            std::cout << "The hypotenuse is "<< std::fixed
-            << std::setprecision(2) << hypotenuse << "\n";
-            std::cout << "The perimeter is " << std::fixed
-            << std::setprecision(2) << perimeter << "\n";
+            // Rounding and printing the hypotenuse and
+            // perimeter to the user.
+            std::cout << "The hypotenuse is "
+                      << std::fixed << std::setprecision(2)
+                      << hypotenuse << "\n";
+            std::cout << "The perimeter is "
+                      << std::fixed << std::setprecision(2)
+                      << perimeter << "\n";
 
-            // Asking the user if they want to run the program again.
+            // Asking the user if they want to
+            // run the program again.
             std::cout <<
             "Do you want to run the program again? (1 - Yes or 2 - No): ";
-            std::cin >> userInputForLoop;
+            std::cin >> runProgramAgain;
 
-            // Using a try catch to catch any invalid
-            // inputs for user input regarding if they
-            // would like to run my program again.
+            // Using a try-catch to catch any invalid
+            // inputs for user input regarding
+            // if they would like to run my program again.
             try {
-                int userInputForLoopAsInt = std::stoi(userInputForLoop);
+                // Converting user input from a string
+                // to a float.
+                runProgramAgainInt = std::stoi(runProgramAgain);
 
-                // Using if statement to check if the
-                // user's input is not equal to 1,
-                // then break out of the loop.
-                if (userInputForLoopAsInt != "1") {
-                        break;
-                    }
-            // Catching invalid inputs regarding running my program again.
+                // If statement to check if they did not
+                // enter 1, meaning they do not want to
+                // run my program again.
+                if (runProgramAgainInt != 1) {
+                    // If they did not enter 1 then break
+                    // out of the loop.
+                    break;
+                }
+                // Catching any errors for input
+                // regarding if they want to run
+                // my program again.
+                } catch (std::invalid_argument) {
+                    std::cout <<
+                    "Invalid input. Please enter 1 to run";
+                    std::cout <<
+                    " my program again or 2 to stop my program.\n";
+
+                    // If the input is invalid then
+                    // break out of the loop.
+                    break;
+                }
+                // Catching invalid inputs for side lengths.
             } catch (std::invalid_argument) {
                 std::cout <<
-                "Invalid input. Please enter 1 to run my program again";
-                std::cout << "or 2 to stop my program.";
+                "Invalid input for sides. Please try again.\n";
+                // If the input for side lengths is invalid
+                // then break out of loop.
                 break;
             }
-        // Catching invalid inputs for side lengths.
-        } catch (std::invalid_argument) {
-            std::cout <<
-            "Invalid input for sides. Please try again.";
-        }
-    } while (userInputForLoopAsInt == "1");
+
+            // Assigning runProgramAgainInt variable to the
+            // value of loopProgram which holds the user's
+            // input (their decision to run my program again
+            // or not).
+            loopProgram = runProgramAgainInt;
+
+            // While loop statement to run loop
+            // only if the user's input (assigned
+            // to the variable runProgramAgain)
+            // is 1.
+        } while (loopProgram == 1);
 }
