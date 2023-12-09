@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Lily Carroll All rights reserved.
 //
 // Created by: Lily Carroll
-// Created on: Dec/1/2023
+// Created on: Dec/8/2023
 // This program gets 2 sides of a right
 // angle triangle and calculates the hypotenuse.
 // It uses a While True loop to run my program again.
@@ -40,7 +40,6 @@ int main() {
     std::cout << " for my program to be run again.\n";
 
     // Declaring variables.
-    // Declare runProgramAgain variable before the loop.
     int loopProgram = 0;
     std::string sideA;
     std::string sideB;
@@ -65,6 +64,12 @@ int main() {
             float sideAAsFloat = std::stof(sideA);
             float sideBAsFloat = std::stof(sideB);
 
+            // Error checking for negative inputs for side lengths.
+            if (sideAAsFloat <= 0 || sideBAsFloat <= 0) {
+                    std::cout << "Side lengths must be greater than 0.";
+                    break;
+            }
+
             // Calling functions to display the
             // hypotenuse and perimeter.
             hypotenuse = CalculateHypotenuse(sideAAsFloat, sideBAsFloat);
@@ -74,10 +79,10 @@ int main() {
             // perimeter to the user.
             std::cout << "The hypotenuse is "
                       << std::fixed << std::setprecision(2)
-                      << hypotenuse << "\n";
+                      << hypotenuse << " cm.\n";
             std::cout << "The perimeter is "
                       << std::fixed << std::setprecision(2)
-                      << perimeter << "\n";
+                      << perimeter << " cm.\n";
 
             // Asking the user if they want to
             // run the program again.
@@ -96,42 +101,44 @@ int main() {
                 // If statement to check if they did not
                 // enter 1, meaning they do not want to
                 // run my program again.
+
                 if (runProgramAgainInt != 1) {
                     // If they did not enter 1 then break
                     // out of the loop.
                     break;
                 }
+
                 // Catching any errors for input
                 // regarding if they want to run
                 // my program again.
-                } catch (std::invalid_argument) {
-                    std::cout <<
-                    "Invalid input. Please enter 1 to run";
-                    std::cout <<
-                    " my program again or 2 to stop my program.\n";
+                    } catch (std::invalid_argument) {
+                        std::cout <<
+                        "Invalid input. Please enter 1 to run";
+                        std::cout <<
+                        " my program again or 2 to stop my program.\n";
 
-                    // If the input is invalid then
-                    // break out of the loop.
-                    break;
-                }
-                // Catching invalid inputs for side lengths.
+                        // If the input is invalid then
+                        // break out of the loop.
+                        break;
+                    }
+
+                    // Assigning runProgramAgainInt variable to the
+                    // value of loopProgram which holds the user's
+                    // input (their decision to run my program again
+                    // or not).
+                    loopProgram = runProgramAgainInt;
+
+            // Catching invalid inputs for side lengths.
             } catch (std::invalid_argument) {
-                std::cout <<
-                "Invalid input for sides. Please try again.\n";
-                // If the input for side lengths is invalid
-                // then break out of loop.
-                break;
-            }
+            std::cout << "Invalid input for sides. Please try again.\n";
+            // If the input for side lengths is invalid
+            // then break out of the loop.
+            break;
+        }
 
-            // Assigning runProgramAgainInt variable to the
-            // value of loopProgram which holds the user's
-            // input (their decision to run my program again
-            // or not).
-            loopProgram = runProgramAgainInt;
-
-            // While loop statement to run loop
-            // only if the user's input (assigned
-            // to the variable runProgramAgain)
-            // is 1.
+        // While loop statement to run loop
+        // only if the user's input (assigned
+        // to the variable loopProgram)
+        // is 1.
         } while (loopProgram == 1);
 }
