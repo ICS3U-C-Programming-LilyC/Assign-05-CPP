@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Lily Carroll All rights reserved.
 //
 // Created by: Lily Carroll
-// Created on: Dec/8/2023
+// Created on: Dec/9/2023
 // This program gets 2 sides of a right
 // angle triangle and calculates the hypotenuse.
 // It uses a While True loop to run my program again.
@@ -16,7 +16,8 @@
 float CalculateHypotenuse(float sideA, float sideB) {
     // Calculating hypotenuse.
     float sumOfSquares = (sideA * sideA) + (sideB * sideB);
-    return std::sqrt(sumOfSquares);
+    float hypotenuse = std::sqrt(sumOfSquares);
+    return hypotenuse;
 }
 
 // Declaring function to calculate the perimeter.
@@ -26,7 +27,8 @@ float CalculatePerimeter(float sideA, float sideB) {
     // the perimeter.
     float hypotenuse = CalculateHypotenuse(sideA, sideB);
     // Calculating the perimeter.
-    return sideA + sideB + hypotenuse;
+    float perimeter = sideA + sideB + hypotenuse;
+    return perimeter;
 }
 
 // Declaring main() function to get user input/output,
@@ -48,7 +50,9 @@ int main() {
     float hypotenuse;
     float perimeter;
 
-    // Initiating Do...While loop.
+    // Initiating Do...While loop, to allow
+    // the user to rerun my program if they
+    // would like to.
     do {
         // Getting user input for sides A and B.
         std::cout << "Enter the length of side A (cm): ";
@@ -64,7 +68,8 @@ int main() {
             float sideAAsFloat = std::stof(sideA);
             float sideBAsFloat = std::stof(sideB);
 
-            // Error checking for negative inputs for side lengths.
+            // Error checking for negative or 0 inputs for
+            // side lengths.
             if (sideAAsFloat <= 0 || sideBAsFloat <= 0) {
                     std::cout << "Side lengths must be greater than 0.";
                     break;
